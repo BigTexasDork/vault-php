@@ -15,7 +15,7 @@ class TokenAuthenticationStrategyTest extends \Codeception\Test\Unit
     public function testCanAuthenticate()
     {
         $client = (new Client(new Guzzle6Transport()))
-            ->setAuthenticationStrategy(new TokenAuthenticationStrategy('db02de05-fa39-4855-059b-67221c5c2f63'))
+            ->setAuthenticationStrategy(new TokenAuthenticationStrategy('s.5ajAImFmAnCpqBdm9qpaNFTk'))
             ->setLogger(new NullLogger());
 
         $this->assertEquals($client->getAuthenticationStrategy()->getClient(), $client);
