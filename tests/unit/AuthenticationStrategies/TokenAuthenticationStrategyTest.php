@@ -4,6 +4,8 @@ use Psr\Log\NullLogger;
 use Vault\AuthenticationStrategies\TokenAuthenticationStrategy;
 use Vault\Client;
 use VaultTransports\Guzzle6Transport;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 class TokenAuthenticationStrategyTest extends \Codeception\Test\Unit
 {
@@ -14,10 +16,12 @@ class TokenAuthenticationStrategyTest extends \Codeception\Test\Unit
 
     public function testCanAuthenticate()
     {
+        $log = new Logger('name');
+        $log->pushHandler(new StreamHandler('./log.log', Logger::DEBUG));
         // $client = (new Client(new Guzzle6Transport(['base_url' => 'http://10.0.62.176:8200'])))
         $client = (new Client(new Guzzle6Transport()))
             ->setAuthenticationStrategy(new TokenAuthenticationStrategy('s.5ajAImFmAnCpqBdm9qpaNFTk'))
-            ->setLogger(new NullLogger());
+            ->setLogger($log);
 
         $this->assertEquals($client->getAuthenticationStrategy()->getClient(), $client);
         // $this->assertTrue($client->authenticate());
