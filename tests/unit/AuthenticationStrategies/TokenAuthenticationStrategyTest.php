@@ -24,7 +24,7 @@ class TokenAuthenticationStrategyTest extends \Codeception\Test\Unit
             ->setLogger($log);
 
         $this->assertEquals($client->getAuthenticationStrategy()->getClient(), $client);
-        // $this->assertTrue($client->authenticate());
+        $this->assertTrue($client->authenticate());
         // $this->assertNotEmpty($client->getToken());
 
         return $client;
